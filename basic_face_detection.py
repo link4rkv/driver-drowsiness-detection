@@ -23,12 +23,14 @@ while True:
         frame = cv.ellipse(frame, center, (w//2, h//2), 0, 0, 360, (255, 0, 255), 4)
         faceROI = frame_gray[y:y+h,x:x+w]
         eyes = eyes_cascade.detectMultiScale(faceROI)
+        
         for (x2,y2,w2,h2) in eyes:
             eye_center = (x + x2 + w2//2, y + y2 + h2//2)
             radius = int(round((w2 + h2)*0.25))
             frame = cv.circle(frame, eye_center, radius, (255, 0, 0 ), 4)
+            #frame = cv.rectangle(frame, (x + x2, y + y2), (x + x2 + w2, y + y2 + h2), (0, 255, 0), 3)
         
-    cv.imshow('Capture - Face detection', frame)
+    cv.imshow('Face detection', frame)
     if cv.waitKey(10) == 27:
         break
 
